@@ -1,0 +1,26 @@
+Project: Image Captioning — Encoder-Decoder with Attention
+
+Abstract:
+We implement a neural image captioning pipeline using a pretrained ResNet-50 encoder and an LSTM decoder with additive attention. The model is trained on the Flickr8k dataset and evaluated on standard metrics. This report summarizes dataset, model architecture, training regimen, and results.
+
+Dataset:
+- Flickr8k: ~8k images with 5 captions each. Preprocessing includes resizing to 224x224 and normalization.
+
+Model:
+- Encoder: ResNet-50 (pretrained) as feature extractor; output spatial features pooled to fixed grid size and reshaped into 'num_pixels'.
+- Attention: Computes attention weights over image regions per decoding step.
+- Decoder: LSTMCell that consumes previous word embedding + context vector, produces probability distribution over vocabulary.
+
+Training:
+- Loss: CrossEntropy with padding ignored.
+- Optimizer: Adam.
+- Checkpointing: Save per-epoch checkpoint.
+
+Results:
+- For quick demo runs (2–5 epochs) the model produces coherent short captions that often describe salient objects (e.g., "a dog is running through grass"). For production-quality captions increase epochs and use larger dataset (Flickr30k / COCO).
+
+How to run:
+See README.md (Colab recommended).
+
+References:
+- Show, Attend and Tell: Neural Image Caption Generation with Visual Attention (Xu et al., 2015)
